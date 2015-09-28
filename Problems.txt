@@ -1,0 +1,3 @@
+In the try of the causeError2 method, there was a miss-cast, removed it and make 'fs' an input stream
+Moved the file reading inside the try catch for readability
+Shouldn't have an additional try catch inside of read file

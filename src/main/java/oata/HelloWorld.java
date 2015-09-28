@@ -20,13 +20,13 @@ public class HelloWorld {
       w = causeError2();
     }
     catch (Exception e) {
-       System.err.println("There was a problem!");
+      System.err.println("There was a problem!");
     }
     try {
       causeError2();
     }
     catch (Exception e) {
-       System.err.println("There was a problem!\nPlease fix the code");
+      System.err.println("There was a problem!\nPlease fix the code");
     }
     LOG.info(w);
   }
@@ -36,34 +36,22 @@ public class HelloWorld {
     StringBuilder sb = new StringBuilder();
 
     String line;
-    try {
-
-      br = new BufferedReader(new InputStreamReader(fs));
-      while ((line = br.readLine()) != null) {
-        sb.append(line);
-      }
-
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw e;
-    } finally {
-      if (br != null) {
-        try {
-          br.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
+    br = new BufferedReader(new InputStreamReader(fs));
+    while ((line = br.readLine()) != null) {
+      sb.append(line);
     }
-
+    br.close();
+    
     return sb.toString();
   }
   public static String causeError2() throws IOException {
     StringBuilder sb = new StringBuilder();
-    try (FileInputStream fs = (FileInputStream) HelloWorld.class.getClassLoader().getResourceAsStream("myfile")){
+    try{
+      InputStream fs = HelloWorld.class.getClassLoader().getResourceAsStream("myfile");
       sb.append(readFile(fs));
     }
-    catch (IOException e) {
+    catch (Exception e) {
+      e.printStackTrace();
       System.err.println("I caught a problem");
       throw e;
     }
